@@ -2,7 +2,15 @@ version: 2
 jobs:
   build:
     docker: 
-      - image: circleci/ruby:2.4.1
+      - image: httpd:latest
     steps:
       - checkout
-      - run: python success.py
+      - run: cat /usr/local/apache2/htdocs/index.html
+      - run: ip addr show
+      - run: apt-get update
+      - run: apt-get -y install curl
+      - run: httpd 
+      - run: sleep 5
+      - run: ps -ef | grep httpd
+      - run: curl localhost
+      - run: sleep 300
